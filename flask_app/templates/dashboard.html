@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>{{ firstname }}'s Dashboard</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navleft">
+            <h1>Welcome, {{ firstname }}!</h1>
+        </div>
+        <div class="navright">
+            <a href="/recipes/new">Create</a>
+            <form action="/logout" method="POST">
+                <input type="hidden" value="{{ userid }}" name="id">
+                <input class="submit" type="submit" value="Logout">
+            </form>
+        </div>
+    </div>
+    <p class="subheader">These are the recipes</p>
+    <table class="recipes">
+        <tr class="recipes-tr">
+            <th class="recipes-th">Name</th>
+            <th class="recipes-th">Under 30 minutes?</th>
+            <th class="recipes-th">Actions</th>
+        </tr>
+        {% for recipe in recipes %}
+            <tr class="recipes-tr">
+                <td class="recipes-td">{{ recipe.name }}</td>
+                <td class="recipes-td">{{ recipe.under_30 }}</td>
+                <td class="recipes-td">
+                    <a href="/recipes/{{ recipe.id }}">view instructions</a>
+                    {% if recipe.user_id == userid %}
+                        <a href="/recipes/edit/{{ recipe.id }}">edit</a>
+                        <a href="/recipes/delete/{{ recipe.id }}">delete</a>
+                        {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

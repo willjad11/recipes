@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Viewing {{ recipe.name }}</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navleft">
+            <h1>Welcome, {{ firstname }}!</h1>
+        </div>
+        <div class="navright">
+            <a href="/dashboard">Dashboard</a>
+            <form action="/logout" method="POST">
+                <input type="hidden" value="{{ userid }}" name="id">
+                <input class="submit" type="submit" value="Logout">
+            </form>
+        </div>
+    </div>
+    <h1 class="recipe-title">{{ recipe.name }}</h1>
+    <div class="recipecont">
+        <table>
+            <tr>
+                <td class="recipe-title">Description:</td>
+                <td>{{ recipe.description }}</td>
+            </tr>
+            <tr>
+                <td class="recipe-title">Under 30 Minutes:</td>
+                <td>{{ recipe.under_30 }}</td>
+            </tr>
+            <tr>
+                <td class="recipe-title">Instructions:</td>
+                <td>{{ recipe.instructions }}</td>
+            </tr>
+            <tr>
+                <td class="recipe-title">Date Made:</td>
+                <td>{{ recipe.date_made }}</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>

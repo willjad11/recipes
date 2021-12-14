@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Add New Recipe!</title>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navleft">
+            <h1>Add New Recipe</h1>
+        </div>
+        <div class="navright">
+                <a href="/">Dashboard</a>
+                <form action="/logout" method="POST">
+                    <input type="hidden" value="{{ userid }}" name="id">
+                    <input class="submit" type="submit" value="Logout">
+                </form>
+        </div>
+    </div>
+    <div class="cont2">
+        <div class="box3">
+            <form class="form" action='/recipes/new/create' method='POST'>
+                {% for error in get_flashed_messages(category_filter=["recipe1"]) %}
+                <p class="error">{{ error }}</p>
+                {% endfor %}
+                <label for='name'>Name:</label>
+                <input class="textform" type='text' name='name'>
+                {% for error in get_flashed_messages(category_filter=["recipe2"]) %}
+                <p class="error">{{ error }}</p>
+                {% endfor %}
+                <label for='desc'>Description:</label>
+                <textarea class="textarea" name="desc"></textarea>
+                {% for error in get_flashed_messages(category_filter=["recipe3"]) %}
+                <p class="error">{{ error }}</p>
+                {% endfor %}
+                <label for='inst'>Instructions:</label>
+                <textarea class="textarea" name="inst"></textarea>
+        </div>
+        <div class="box4">
+            {% for error in get_flashed_messages(category_filter=["recipe4"]) %}
+            <p class="error">{{ error }}</p>
+            {% endfor %}
+            <label for='date'>Date Made On:</label>
+            <input class="date" type='date' name='date'>
+            {% for error in get_flashed_messages(category_filter=["recipe5"]) %}
+            <p class="error">{{ error }}</p>
+            {% endfor %}
+            <label for='under'>Under 30 Minutes?</label>
+            <div class="radio">
+                <input type="radio" name="under" value="yes">
+                <label for="under">Yes</label>
+                <input type="radio" name="under" value="no">
+                <label for="under">No</label>
+            </div>
+            <input class="submit" type='submit' value='Create'>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
